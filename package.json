@@ -6,14 +6,18 @@
 		"couchbase"
 		],
 	"maintainers": [
-	{
-		"name": "Preetam Jinka",
-		"email": "pj@isomero.us",
-		"web": "https://isomero.us/"
-	}
+		{
+			"name": "Preetam Jinka",
+			"email": "pj@isomero.us",
+			"web": "https://isomero.us/"
+		}
 	],
-		"dependencies": {
+	"dependencies": {
 			"request": "*",
 			"memcache": "*"
-		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "http://repo.isomero.us/git/isomerous/atto.git"
+	}
 }
