@@ -20,21 +20,22 @@ Installation is simple. Just run `npm install atto`.
 
 Creating the object
 ----
-		// var db = require('atto')(memcachedPort, memcachedHost, dbHost, bucketName, bucketUsername, bucketPassword)
-		var db = require('atto')(11211, '127.0.0.1', 'db.isomero.us', 'myBucket', 'bucketUser', 'bucketPassword')
+	// var db = require('atto')(memcachedPort, memcachedHost, dbHost, bucketName, bucketUsername, bucketPassword)
+	
+	var db = require('atto')(11211, '127.0.0.1', 'db.isomero.us', 'myBucket', 'bucketUser', 'bucketPassword')
 
 Callbacks
 ----
 Callbacks should be in the following format:
-		function(error, response) {}
+	function(error, response) {}
 
 Set
 ----
-		db.set(key, value, cb);
+	db.set(key, value, cb);
 
 Get
 ----
-		db.get(key, cb);
+	db.get(key, cb);
 
 View
 ----
