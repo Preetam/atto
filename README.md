@@ -39,5 +39,5 @@ Get
 
 View
 ----
-		db.view(designDoc, viewName, params, cb);
+	db.view(designDoc, viewName, params, cb);
 The first two parameters are strings. `params` should be an object like `{key: 'someKey'}`
