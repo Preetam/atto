@@ -38,7 +38,7 @@ var atto = function(memcachedPort, memcachedHost, dbTarget, bucketName, usr, pwd
 				}
 			}
 			else
-				cb(err, res);
+			cb(err, res);
 		});
 	};
 
@@ -51,7 +51,6 @@ var atto = function(memcachedPort, memcachedHost, dbTarget, bucketName, usr, pwd
 	getViewNodes(dbTarget, usr, pwd, this);
 }
 
-// dbTarget example: usr:pwd@hostname.com
 module.exports = function(memcachedPort, memcachedHost, dbTarget, bucketName, usr, pwd) {
 	return new atto(memcachedPort, memcachedHost, dbTarget, bucketName, usr, pwd);
 };
