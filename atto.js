@@ -1,6 +1,6 @@
 var memcache = require('memcache'),
-		request  = require('request'),
-		qs       = require('querystring');
+    request  = require('request'),
+    qs       = require('querystring');
 
 
 function getViewNodes(dbTarget, usr, pwd, obj) {
@@ -8,7 +8,7 @@ function getViewNodes(dbTarget, usr, pwd, obj) {
 		nodes = JSON.parse(body).nodes;
 		for(var i in nodes)
 		nodes[i] = nodes[i].couchApiBase.replace("http://", "http://"+usr+':'+pwd+'@');
-		obj.nodes = nodes;
+	obj.nodes = nodes;
 	});
 }
 
