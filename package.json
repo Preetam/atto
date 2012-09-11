@@ -1,0 +1,19 @@
+{
+	"name": "atto",
+	"description": "A minimalist Couchbase driver",
+	"version": "0.0.1",
+	"keywords": [
+		"couchbase"
+		],
+	"maintainers": [
+	{
+		"name": "Preetam Jinka",
+		"email": "pj@isomero.us",
+		"web": "https://isomero.us/"
+	}
+	],
+		"dependencies": {
+			"request": "*",
+			"memcache": "*"
+		}
+}
