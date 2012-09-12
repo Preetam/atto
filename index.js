@@ -61,14 +61,14 @@ var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pw
 
 	this.inc = function (key, value, cb) {
 		if(arguments.length == 2)
-			inc(args[0], 1, args[1]);
+			inc(arguments[0], 1, arguments[1]);
 		else
 			client.increment(key, value, cb);
 	};
 
 	this.dec = function (key, value, cb) {
 		if(arguments.length == 2)
-			dec(args[0], 1, args[1]);
+			dec(arguments[0], 1, arguments[1]);
 		else
 			client.decrement(key, value, cb);
 	};
