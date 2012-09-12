@@ -1,6 +1,6 @@
-var memcache = require('memcache'),
-    request = require('request'),
-    qs = require('querystring');
+var memcache = require('memcache')
+, request = require('request')
+, qs = require('querystring');
 
 /*  
  *  This emitter lets us know when
@@ -16,10 +16,11 @@ var readyEmitter = new (require('events')).EventEmitter();
 function getViewNodes(dbTarget, usr, pwd, obj) {
 	request.get("http://" + usr + ':' + pwd + '@' + dbTarget + ":8091/pools/default", function (err, res, body) {
 		nodes = JSON.parse(body).nodes;
-		
-		for (var i in nodes)
+
+		for (var i in nodes) {
 			nodes[i] = nodes[i].couchApiBase.replace("http://", "http://" + usr + ':' + pwd + '@');
-		
+		}
+
 		obj.nodes = nodes;
 
 		/*  
@@ -53,7 +54,7 @@ var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pw
 
 				}
 			}
-			
+
 			cb(err, res);
 		});
 	};
@@ -74,7 +75,7 @@ var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pw
 				cb(err, JSON.parse(body));
 			});
 	}
-	
+
 	/*  
 	 *  Getting the array of nodes.
 	 */
