@@ -16,7 +16,9 @@ Atto is not a "smart" memcached client. It won't automatically connect to multip
 
 API reference
 ====
-Installation is simple. Just run `npm install atto`.
+Installation is simple.
+
+	$ npm install atto
 
 Creating the object
 ----
@@ -27,6 +29,7 @@ Creating the object
 Callbacks
 ----
 Callbacks should be in the following format:
+
 	function(error, response) {}
 
 Set
@@ -40,4 +43,10 @@ Get
 View
 ----
 	db.view(designDoc, viewName, params, cb);
-The first two parameters are strings. `params` should be an object like `{key: 'someKey'}`
+
+The first two parameters are strings. `params` should be an object (for `querystring`):
+
+	{
+		key: 'documentKey',
+		limit: 10
+	}
