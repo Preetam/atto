@@ -59,6 +59,20 @@ var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pw
 		});
 	};
 
+	this.inc = function (key, value, cb) {
+		if(arguments.length == 2)
+			inc(args[0], 1, args[1]);
+		else
+			client.increment(key, value, cb);
+	};
+
+	this.dec = function (key, value, cb) {
+		if(arguments.length == 2)
+			dec(args[0], 1, args[1]);
+		else
+			client.decrement(key, value, cb);
+	};
+
 	this.view = function (designDoc, viewName, params, cb) {
 		/*  
 		 *  We're going to queue view
@@ -74,12 +88,16 @@ var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pw
 			request.get(nodes[0] + bucketName + '/_design/' + designDoc + '/_view/' + viewName + '?' + qs.stringify(params), function (err, res, body) {
 				cb(err, JSON.parse(body));
 			});
-	}
+	};
 
 	/*  
 	 *  Getting the array of nodes.
 	 */
 	getViewNodes(dbTarget, usr, pwd, this);
+
+	this.close = function() {
+		client.close();
+	};
 }
 
 module.exports = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pwd) {
