@@ -22,9 +22,7 @@ Installation is simple.
 
 Creating the object
 ----
-	// var db = require('atto')(memcachedPort, memcachedHost, dbHost, bucketName, bucketUsername, bucketPassword)
-	
-	var db = require('atto')(11211, '127.0.0.1', 'db.isomero.us', 'myBucket', 'bucketUser', 'bucketPassword')
+	var db = require('atto')(memcachedPort, memcachedHost, dbHost, bucketName, bucketUsername, bucketPassword)
 
 Callbacks
 ----
@@ -40,6 +38,14 @@ Get
 ----
 	db.get(key, cb);
 
+Increment
+----
+	db.inc(key[, value], cb);
+
+Decrement
+----
+	db.dec(key[, value], cb);
+
 View
 ----
 	db.view(designDoc, viewName, params, cb);
@@ -50,3 +56,9 @@ The first two parameters are strings. `params` should be an object (for `queryst
 		key: 'documentKey',
 		limit: 10
 	}
+
+TODO
+----
+* Optional bucket authentication (required right now)
+* Optional key expiration
+* More memcached functions
