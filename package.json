@@ -1,7 +1,7 @@
 {
 	"name": "atto",
 	"description": "A minimalist Couchbase driver",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"keywords": [
 		"couchbase"
 		],
@@ -18,6 +18,6 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "http://repo.isomero.us/git/isomerous/atto.git"
+		"url": "git://github.com/PreetamJinka/atto.git"
 	}
 }
