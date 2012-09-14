@@ -38,13 +38,19 @@ Get
 ----
 	db.get(key, cb);
 
+*Response:* An object if the value is valid JSON. Otherwise, the response is a string.
+
 Increment
 ----
 	db.inc(key[, value], cb);
 
+*Response:* The incremented value.
+
 Decrement
 ----
 	db.dec(key[, value], cb);
+
+*Response:* The decremented value.
 
 View
 ----
@@ -56,6 +62,8 @@ The first two parameters are strings. `params` should be an object (for `queryst
 		key: 'documentKey',
 		limit: 10
 	}
+
+*Response:* Unmodified JSON from the HTTP request.
 
 TODO
 ----
