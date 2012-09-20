@@ -14,20 +14,33 @@ var readyEmitter = new (require('events')).EventEmitter();
  *  we use for views via HTTP.
  */
 function getViewNodes(dbTarget, usr, pwd, obj) {
-	request.get("http://" + usr + ':' + pwd + '@' + dbTarget + ":8091/pools/default", function (err, res, body) {
-		nodes = JSON.parse(body).nodes;
 
-		for (var i in nodes) {
-			nodes[i] = nodes[i].couchApiBase.replace("http://", "http://" + usr + ':' + pwd + '@');
-		}
+	if(usr && pwd)
+		request.get("http://" + usr + ':' + pwd + '@' + dbTarget + ":8091/pools/default", function (err, res, body) {
+			nodes = JSON.parse(body).nodes;
+			
+			for (var i in nodes) {
+				nodes[i] = nodes[i].couchApiBase.replace("http://", "http://" + usr + ':' + pwd + '@');
+			}
 
-		obj.nodes = nodes;
+			obj.nodes = nodes;
 
-		/*  
-		 *  We're ready to go!
-		 */
-		readyEmitter.emit('ready');
-	});
+			/*  
+			 *  We're ready to go!
+			 */
+			readyEmitter.emit('ready');
+		});
+	else
+		request.get("http://" + dbTarget + ":8091/pools/default", function (err, res, body) {
+			nodes = JSON.parse(body).nodes;
+
+			obj.nodes = nodes;
+
+			/*  
+			 *  We're ready to go!
+			 */
+			readyEmitter.emit('ready');
+		});
 }
 
 var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pwd) {
@@ -74,6 +87,9 @@ var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pw
 	};
 
 	this.view = function (designDoc, viewName, params, cb) {
+		for(var key in params)
+			params[key] = JSON.stringify(params[key]);
+
 		/*  
 		 *  We're going to queue view
 		 *  queries until we're ready.
