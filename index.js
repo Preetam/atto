@@ -10,6 +10,7 @@ function getViewNodes(dbTarget, usr, pwd, obj, readyEmitter) {
 
 	if(usr && pwd)
 		request.get("http://" + usr + ':' + pwd + '@' + dbTarget + ":8091/pools/default", function (err, res, body) {
+
 			nodes = JSON.parse(body).nodes;
 			
 			for (var i in nodes) {
@@ -87,6 +88,7 @@ var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pw
 	};
 
 	this.view = function (designDoc, viewName, params, cb) {
+
 		for(var key in params)
 			params[key] = JSON.stringify(params[key]);
 
@@ -94,16 +96,18 @@ var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pw
 		 *  We're going to queue view
 		 *  queries until we're ready.
 		 */
-		if(typeof nodes == 'undefined')
+		if(typeof this.nodes == 'undefined' || this.nodes == null) {
 			readyEmitter.addListener('ready', function() {
-				request.get(nodes[0] + bucketName + '/_design/' + designDoc + '/_view/' + viewName + '?' + qs.stringify(params), function (err, res, body) {
+				request.get(this.nodes[0] + bucketName + '/_design/' + designDoc + '/_view/' + viewName + '?' + qs.stringify(params), function (err, res, body) {
 					cb(err, JSON.parse(body));
 				});
 			});
-		else
-			request.get(nodes[0] + bucketName + '/_design/' + designDoc + '/_view/' + viewName + '?' + qs.stringify(params), function (err, res, body) {
+		}
+		else {
+			request.get(this.nodes[0] + bucketName + '/_design/' + designDoc + '/_view/' + viewName + '?' + qs.stringify(params), function (err, res, body) {
 				cb(err, JSON.parse(body));
 			});
+		}
 	};
 
 	/*  
