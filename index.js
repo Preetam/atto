@@ -43,7 +43,7 @@ var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pw
 	 *  the node array is ready to be
 	 *  used.
 	 */
-	var readyEmitter = new (require('events')).EventEmitter();
+	this.readyEmitter = new (require('events')).EventEmitter();
 
 	this.nodes = null;
 	var client = new memcache.Client(memcachedPort, memcachedHost);
@@ -97,8 +97,8 @@ var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pw
 		 *  queries until we're ready.
 		 */
 		if(typeof this.nodes == 'undefined' || this.nodes == null) {
-			readyEmitter.addListener('ready', function() {
-				request.get(this.nodes[0] + bucketName + '/_design/' + designDoc + '/_view/' + viewName + '?' + qs.stringify(params), function (err, res, body) {
+			this.readyEmitter.addListener('ready', function() {
+				request.get(nodes[0] + bucketName + '/_design/' + designDoc + '/_view/' + viewName + '?' + qs.stringify(params), function (err, res, body) {
 					cb(err, JSON.parse(body));
 				});
 			});
@@ -113,7 +113,7 @@ var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pw
 	/*  
 	 *  Getting the array of nodes.
 	 */
-	getViewNodes(dbTarget, usr, pwd, this, readyEmitter);
+	getViewNodes(dbTarget, usr, pwd, this, this.readyEmitter);
 
 	this.close = function() {
 		client.close();
