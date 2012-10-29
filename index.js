@@ -53,10 +53,10 @@ var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pw
 		console.log('Memcached protocol error');
 	});
 
-	this.set = function (key, value, cb) {
+	this.set = function (key, value, cb, lifetime) {
 		if (typeof value == 'object')
 			value = JSON.stringify(value);
-		client.set(key, value, cb);
+		client.set(key, value, cb, lifetime);
 	};
 
 	this.get = function (key, cb) {

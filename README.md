@@ -32,7 +32,7 @@ Callbacks should be in the following format:
 
 Set
 ----
-	db.set(key, value, cb);
+	db.set(key, value, cb[, lifetime]);
 
 Get
 ----
@@ -68,5 +68,4 @@ The first two parameters are strings. `params` should be an object (for `queryst
 TODO
 ----
 * Optional bucket authentication (required right now)
-* Optional key expiration
 * More memcached functions
