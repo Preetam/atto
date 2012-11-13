@@ -1,7 +1,7 @@
 {
 	"name": "atto",
 	"description": "A minimalist Couchbase driver",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"keywords": [
 		"couchbase"
 		],
@@ -14,7 +14,7 @@
 	],
 	"dependencies": {
 			"request": "*",
-			"memcache": "*"
+			"memcached": "*"
 	},
 	"repository": {
 		"type": "git",

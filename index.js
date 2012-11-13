@@ -1,4 +1,4 @@
-var memcache = require('memcache')
+var memcached = require('memcached')
 , request = require('request')
 , qs = require('querystring');
 
@@ -46,45 +46,23 @@ var atto = function (memcachedPort, memcachedHost, dbTarget, bucketName, usr, pw
 	this.readyEmitter = new (require('events')).EventEmitter();
 
 	this.nodes = null;
-	var client = new memcache.Client(memcachedPort, memcachedHost);
-	client.connect();
-
-	client.on('error', function (e) {
-		console.log('Memcached protocol error');
-	});
+	memcached = new memcached(memcachedHost+':'+memcachedPort);
 
 	this.set = function (key, value, cb, lifetime) {
-		if (typeof value == 'object')
-			value = JSON.stringify(value);
-		client.set(key, value, cb, lifetime);
+		if(!lifetime) lifetime = 0;
+		memcached.set(key, value, lifetime, cb);
 	};
 
 	this.get = function (key, cb) {
-		client.get(key, function (err, res) {
-			if (!err) {
-				try {
-					var res = JSON.parse(res);
-				} catch (e) {
-
-				}
-			}
-
-			cb(err, res);
-		});
+		memcached.get(key, cb);
 	};
 
-	this.inc = function (key, value, cb) {
-		if(arguments.length == 2)
-			this.inc(arguments[0], 1, arguments[1]);
-		else
-			client.increment(key, value, cb);
+	this.incr = function (key, value, cb) {
+		memcached.increment(key, value, cb);
 	};
 
-	this.dec = function (key, value, cb) {
-		if(arguments.length == 2)
-			this.dec(arguments[0], 1, arguments[1]);
-		else
-			client.decrement(key, value, cb);
+	this.decr = function (key, value, cb) {
+		memcached.decrement(key, value, cb);
 	};
 
 	this.view = function (designDoc, viewName, params, cb) {

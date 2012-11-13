@@ -42,13 +42,13 @@ Get
 
 Increment
 ----
-	db.inc(key[, value], cb);
+	db.inc(key, value, cb);
 
 *Response:* The incremented value.
 
 Decrement
 ----
-	db.dec(key[, value], cb);
+	db.dec(key, value, cb);
 
 *Response:* The decremented value.
 
