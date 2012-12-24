@@ -1,7 +1,7 @@
 {
 	"name": "atto",
 	"description": "A minimalist Couchbase driver",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"keywords": [
 		"couchbase"
 		],
