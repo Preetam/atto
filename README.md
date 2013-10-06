@@ -1,3 +1,9 @@
+<p align=center><img src="http://i.imgur.com/7tZPxba.png"/></p>
+
+Use the official Couchbase driver: https://github.com/couchbase/couchnode
+
+----
+
 Atto
 ====
 Atto is a minimalist Couchbase driver.
